@@ -1,7 +1,9 @@
 body {
-    background: #56CCF2; 
-    background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  
-    background: linear-gradient(to right, #2F80ED, #56CCF2); 
+    background: #870000;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #190A05, #870000);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #190A05, #870000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
 }
 .content {
     margin-top: 40px;
@@ -21,10 +23,11 @@ form {
     list-style: none;
     width: 80%;
     text-align: center;
+    font-size: 14px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #56CCF2; 
-    background: rgb(219, 246, 255); 
+    border: 1px solid rgb(242, 109, 86); 
+    background: rgb(255, 226, 219); 
 }
 .list li:last-child{
     margin:0;
