@@ -30,17 +30,16 @@ function eventListeners() {
       url += `region=${country}&gender=${gender}&amount=${amount}`
       
       //fetch the requesta
-      fetch(url)
-        .then((res) => {
-          return res.json();
-        })
-        .then(function (names) {
+      getNames(url)
+        .then((names) => {
+
+          let nameRes = names.names;
           //insert the values in html
           const result = document.getElementById('result');
 
           let html = `<h2 class="text-center mb-2"> Generated Names</h2>`;
           html += '<ul class="list">';
-          names.forEach(function (element) {
+          nameRes.forEach(function (element) {
             html += `
               <li>${element.name}</li>
             `;
@@ -74,4 +73,11 @@ function printMessage(message, alert) {
   setTimeout(() => {
     document.querySelector('#generate-names .alert').remove();
   }, 4000);
+}
+
+async function getNames(url) {
+  const res = await fetch(url);
+  const names = await res.json()
+
+  return {names}
 }
