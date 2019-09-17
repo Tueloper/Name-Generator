@@ -19,7 +19,7 @@ function eventListeners() {
     let url = `https://uinames.com/api/?`
 
     //read the country and append date
-    if (country === '' || gender === '' || amount === undefined ) {
+    if (country === '' || gender === '' || amount === undefined) {
       
       //add error prompt
       printMessage('All Fields must be Filled', 'alert-danger');
@@ -30,36 +30,31 @@ function eventListeners() {
       url += `region=${country}&gender=${gender}&amount=${amount}`
       
       //fetch the requesta
-      const xhr = new XMLHttpRequest();
-
-      //open the connection
-      xhr.open('GET', url, true)
-
-      //execute
-      xhr.onload = function () {
-        if (this.status === 200) {
-          const names = JSON.parse(this.responseText)
-          
+      fetch(url)
+        .then((res) => {
+          return res.json();
+        })
+        .then(function (names) {
           //insert the values in html
-          const result = document.getElementById('result')
+          const result = document.getElementById('result');
 
           let html = `<h2 class="text-center mb-2"> Generated Names</h2>`;
           html += '<ul class="list">';
-          names.forEach(element => {
+          names.forEach(function (element) {
             html += `
               <li>${element.name}</li>
-            `
+            `;
           });
-          html += '</ul>'
+          html += '</ul>';
           // return console.log(html)
-          result.innerHTML = html;
-        }
-      };
-
-      xhr.send();
+          result.innerHTML = html; 
+        })
+      .catch( function (e) {
+        console.log(e);
+      });
 
     }
-  })
+  });
 }
 
 //functions
@@ -68,7 +63,7 @@ function printMessage(message, alert) {
   //create the message
   const errorDiv = document.createElement('div');
   errorDiv.classList.add('text-center', 'alert', alert);
-  errorDiv.appendChild(document.createTextNode(message))
+  errorDiv.appendChild(document.createTextNode(message));
 
   // return console.log(errorDiv) 
 
@@ -77,6 +72,6 @@ function printMessage(message, alert) {
 
   //setTimeOut
   setTimeout(() => {
-    document.querySelector('#generate-names .alert').remove()
-  }, 4000)
-};
+    document.querySelector('#generate-names .alert').remove();
+  }, 4000);
+}
